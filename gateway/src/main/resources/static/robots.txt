@@ -1,0 +1,30 @@
+User-agent: *
+Disallow: /*.gif$
+Disallow: /*.jpg$
+Disallow: /*.css$
+Disallow: /*.js$
+
+User-agent: Googlebot
+Disallow: /*.gif$
+Disallow: /*.jpg$
+Disallow: /*.css$
+Disallow: /*.js$
+Crawl-delay: 120
+
+User-agent: yandexBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: Daum
+Crawl-delay: 120
+
+User-agent: Daumoa
+Crawl-delay:120
+
+User-agent: NaverBot
+Crawl-delay: 120
+
+User-agent: Yeti
+Crawl-delay: 120

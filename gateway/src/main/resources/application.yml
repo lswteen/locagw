@@ -1,0 +1,96 @@
+spring:
+  application:
+    name: loca-gateway
+
+  profiles:
+    active: local
+
+  cloud:
+    config:
+      fail-fast: true
+      allow-override: true
+      username: user
+      password: user
+
+    gateway:
+      httpserver:
+        wiretap: false # debugging = true
+      httpclient:
+        connect-timeout: 3_000
+        response-timeout: 5s
+        pool:
+          type: elastic
+          max-idle-time: 60s
+          acquire-timeout: 45_000
+        compression: true
+        ssl:
+          handshake-timeout: 10s
+          close-notify-flush-timeout: 3s
+          close-notify-read-timeout: 10s
+        wiretap: false # debugging = true
+
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOriginPatterns: '*'
+            allowCredentials: true
+            allowedHeaders: '*'
+            allowedMethods:
+              - GET
+              - POST
+              - HEAD
+              - OPTIONS
+
+      default-filters:
+#        - RemoveHttpHeadersFilter
+#        - HeaderFilter
+
+    security:
+      user:
+        name: user
+        password: user_dev
+
+    endpoint:
+      health:
+        enabled: true
+        show-details: never
+      refresh:
+        enabled: true
+    tracing:
+      enabled: true
+      sampling:
+        probability: 1.0
+      propagation:
+        type: w3c
+
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    org.springframework.cloud.gateway: INFO
+    org.springframework.http.server.reactive: INFO
+    org.springframework.web.reactive: INFO
+    org.springframework.boot.autoconfigure.web: INFO
+    reactor.netty: INFO
+
+management:
+  tracing:
+    baggage:
+      correlation:
+        fields:
+          - uri
+          - svc_nation_cd
+          - appNo
+          - contexturl
+          - useragent
+          - postion
+          - location
+          - targetserver
+          - detailmessage
+          - page_no
+          - device_info
+          - clientIP
+
+# server graceful 추가
+server:
+  shutdown: graceful
+  port: 9999
