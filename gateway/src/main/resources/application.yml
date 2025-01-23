@@ -42,8 +42,8 @@ spring:
               - OPTIONS
 
       default-filters:
-#        - RemoveHttpHeadersFilter
-#        - HeaderFilter
+        - RemoveHttpHeadersFilter
+        - HeaderFilter
 
     security:
       user:
